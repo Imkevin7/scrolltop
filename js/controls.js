@@ -1,75 +1,20 @@
-function ups(a, b) {
-    var upss = '-63px';
-    $(a).animate({
-        top: upss
-    }, 'fast');
-    $(b).animate({
-        top: upss
-    }, 'fast');
-}
+$(window).scroll(function () {
+    var height = $(window).scrollTop(),
+        wrap = $('#wrap'),
+        stat = $('#stat');
+    stat.show().text("Scroll height: " + height);
 
-function downs(a, b) {
-    $(a).animate({
-        top: '0px'
-    }, 'slow');
-    $(b).animate({
-        top: '0px'
-    }, 'slow');
-}
-
-$(".button").mouseenter(function () {
-    var ids = $(this).attr('id');
-    switch (ids) {
-        case 'fo':
-            var f = '.first';
-            var s = '.second';
-            ups(f, s);
-            break;
-        case 'so':
-            var t = '.three';
-            var f = '.four';
-            ups(t, f);
-            break;
-        case 'to':
-            var f = '.five';
-            var s = '.six';
-            ups(f, s);
-            break;
-        case 'fto':
-            var a = '.seven';
-            var b = '.eight';
-            ups(a, b);
-            break;
+    if (height >= 0 && height < 100) {
+        wrap.removeClass().addClass('white');
+    } else if (height > 100 && height < 200) {
+        wrap.removeClass().addClass('red');
+    } else if (height > 200 && height < 400) {
+        wrap.removeClass().addClass('orange');
+    } else if (height > 400 && height < 900) {
+        wrap.removeClass().addClass('green');
+    } else if (height > 900 && height < 1000) {
+        wrap.removeClass().addClass('black');
     }
 
-}).mouseleave(function () {
-    var ids = $(this).attr('id');
-    switch (ids) {
-        case 'fo':
-            var f = '.first';
-            var s = '.second';
-            downs(f, s);
-            break;
-        case 'so':
-            var t = '.three';
-            var f = '.four';
-            downs(t, f);
-            break;
-        case 'to':
-            var f = '.five';
-            var s = '.six';
-            downs(f, s);
-            break;
-        case 'fto':
-            var a = '.seven';
-            var b = '.eight';
-            downs(a, b);
-            break;
-    }
+
 });
-
-function bCard() {
-    var card = $(this).find('span').text();
-    $('.hidden').html("<p class='cc'>" + card + "</p>");
-}
-$('.button').on('click', bCard);
